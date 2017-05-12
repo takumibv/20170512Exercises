@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.accelgraph;
+package jp.ac.titech.itpro.sdl.sensorex;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,7 +11,7 @@ import android.view.View;
 public class GraphView extends View {
 
     private final static String TAG = "GraphView";
-    private final static float Ymax = 20;
+    private final static float Ymax = 10;
     private final static int NDATA_INIT = 256;
 
     private int ndata = NDATA_INIT;
@@ -41,6 +41,7 @@ public class GraphView extends View {
         ndata = w / dw;
         x0 = (w - dw * ndata) / 2;
         y0 = h / 2;
+//        y0 = 0;
         ewidth = x0 + dw * (ndata - 1);
 
         if (y0 / Ymax >= dh + 1)

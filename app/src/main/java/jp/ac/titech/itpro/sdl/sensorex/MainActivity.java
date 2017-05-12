@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.accelgraph;
+package jp.ac.titech.itpro.sdl.sensorex;
 
 import android.app.Activity;
 import android.hardware.Sensor;
@@ -35,6 +35,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private final static float alpha = 0.75F;
 
+    private int step_count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         zView = (GraphView) findViewById(R.id.z_view);
 
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        accelerometer = sensorMgr.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         if (accelerometer == null) {
             Toast.makeText(this, getString(R.string.toast_no_accel_error),
                     Toast.LENGTH_SHORT).show();
@@ -78,7 +80,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        Log.d(TAG, ""+event.values[0]+", "+event.values[1]+", "+event.values[2]);
         vx = alpha * vx + (1 - alpha) * event.values[0];
+//        vx = event.values[0];
+//        vx = ++step_count;
         vy = alpha * vy + (1 - alpha) * event.values[1];
         vz = alpha * vz + (1 - alpha) * event.values[2];
         rate = ((float) (event.timestamp - prevts)) / (1000 * 1000);

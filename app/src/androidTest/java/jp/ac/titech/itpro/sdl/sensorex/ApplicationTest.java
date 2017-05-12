@@ -1,4 +1,4 @@
-package jp.ac.titech.itpro.sdl.accelgraph;
+package jp.ac.titech.itpro.sdl.sensorex;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
